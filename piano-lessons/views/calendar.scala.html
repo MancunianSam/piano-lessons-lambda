@@ -1,0 +1,49 @@
+@(numberOfLessons: Int, lessonLength: Int, days: List[String], monthName: String, month: Int, showPrevious: Boolean, year: Int)
+@main("Select a date") {
+    <ul class="page-template">
+        <li>
+        @if(numberOfLessons == 1) {
+            <h2>Please select a date for your lesson.</h2>
+        } else {
+            <h2>Please select a date for your lessons to start on.</h2>
+            <h3>Your remaining @{
+                numberOfLessons - 1
+            } lessons will be each week on the same date.</h3>
+            <h4>You can select a time on the next page</h4>
+        }
+
+        </li>
+        <li class="calendar-grid">
+            <div class="calendar-header">
+                @if(showPrevious) {
+                    <a class="left-arrow"  href="/calendar/@numberOfLessons/@lessonLength?month=@(month -1)&year=@(year)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 1024 1024" class="icon"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#000000"/>
+                            <title>Previous month</title>
+                        </svg>
+                    </a>
+                }
+                <p class="calendar-month-label">@monthName</p>
+                @if(month != 11) {
+                    <a class="right-arrow" href="/calendar/@numberOfLessons/@lessonLength?month=@(month +1 )&year=@(year)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 1024 1024" class="icon"><path d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z" fill="#000000"/>
+                            <title>Next month</title>
+                        </svg>
+                    </a>
+                }
+            </div>
+            @for(label <- List("Su", "M", "Tu", "W", "Th", "F", "Sa")) {
+                <p class="days-labels">@label</p>
+            }
+            @for(day <- days) {
+                @if(day.isEmpty) {
+                    <span class="missing-day"></span>
+                } else {
+                    <a href="/times/@numberOfLessons/@lessonLength/@(s"$year-${f"${month + 1}%02d"}-${f"${day.toInt}%02d"}")" class="btn">@day</a>
+                }
+
+            }
+
+        </li>
+    </ul>
+}
+
