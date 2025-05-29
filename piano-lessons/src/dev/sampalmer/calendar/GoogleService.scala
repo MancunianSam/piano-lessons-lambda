@@ -22,7 +22,7 @@ object GoogleService {
       .response(asStringAlways)
       .send(backend)
     ujson.read(resp.body)("items").arr.toList
-      .filter(_.apply("id").str.startsWith("sam.palmer2"))
+      .filter(_.apply("id").str.startsWith("clairelpalmer4"))
       .map(_.apply("id").str).head
   }
 

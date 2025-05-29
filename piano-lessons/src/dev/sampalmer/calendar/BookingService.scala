@@ -62,8 +62,8 @@ object BookingService:
          |Notes: ${notes.getOrElse("")}
          |""".stripMargin
     GoogleService.addEvent(calendarId, Event(start, end, s"Trial lesson for $email", description))
-//    EmailService.sendOrderEmail(formData("email"), order)
-//    EmailService.sendOrderEmail("bookings@clairepalmerpiano.co.uk", order.copy(title = "You have a new booking"))
+    EmailService.sendOrderEmail(formData("email"), order)
+    EmailService.sendOrderEmail("bookings@clairepalmerpiano.co.uk", order.copy(title = "You have a new booking"))
 
   }
 
