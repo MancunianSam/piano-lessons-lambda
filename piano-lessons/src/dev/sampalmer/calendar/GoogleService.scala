@@ -2,17 +2,15 @@ package dev.sampalmer.calendar
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import dev.sampalmer.calendar.GoogleService.EventRange
 import sttp.client3.*
-import ujson.*
+import upickle.default.{ReadWriter, write}
 
 import java.security.interfaces.RSAPrivateKey
 import java.time.format.DateTimeFormatter
 import java.time.{Instant, LocalTime, ZonedDateTime}
-import java.util
 import java.util.Base64
 
-class GoogleService {
+object GoogleService {
 
   val backend: SttpBackend[Identity, Any] = HttpClientSyncBackend()
 
@@ -24,7 +22,7 @@ class GoogleService {
       .response(asStringAlways)
       .send(backend)
     ujson.read(resp.body)("items").arr.toList
-      .filter(_.apply("id").str.startsWith("clairelpalmer4"))
+      .filter(_.apply("id").str.startsWith("sam.palmer2"))
       .map(_.apply("id").str).head
   }
 
@@ -35,7 +33,6 @@ class GoogleService {
       .get(uri"https://www.googleapis.com/calendar/v3/calendars/$calendarId/events"
         .addParam("timeMin", startTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME))
         .addParam("timeMax", endTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME))
-        .addParam("timeZone", "UTC")
       )
       .header("Authorization", s"Bearer $accessToken")
       .response(asStringAlways)
@@ -53,20 +50,32 @@ class GoogleService {
       EventRange(start, end)
     }.toList
   }
-  //
-  //  def addEvent(calendarId: String, event: Event): Event =
-  //    calendarApi.events().insert(calendarId, event).execute()
 
-  //  private def calendarApi: Calendar = {
-  //    credentials.refresh()
-  //    val adapter = new HttpCredentialsAdapter(credentials)
-  //    new Calendar.Builder(transport, jsonFactory, adapter)
-  //      .setApplicationName("Piano Lessons")
-  //      .build()
-  //  }
+  def addEvent(calendarId: String, event: Event): Unit =
+    val url = uri"https://www.googleapis.com/calendar/v3/calendars/$calendarId/events"
+
+    val accessToken = createAccessToken
+
+    val eventSummary = EventSummary(
+      summary = event.summary,
+      description = event.description,
+      start = EventDateTime(event.start.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)),
+      end = EventDateTime(event.end.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME))
+    )
+
+    val request = basicRequest
+      .post(url)
+      .header("Authorization", s"Bearer $accessToken")
+      .contentType("application/json")
+      .body(write(eventSummary))
+      .response(asStringAlways)
+
+    val response = request.send(backend)
+    println(response)
+
+
 
   private def createAccessToken = {
-//    val serviceAccountJson = ujson.read(Files.readString(Paths.get("/opt/google-service-account.json")))
     val serviceAccountJson = ujson.read(sys.env("SERVICE_ACCOUNT_CONFIG"))
     val clientEmail = serviceAccountJson("client_email").str
     val privateKeyPem = serviceAccountJson("private_key").str
@@ -95,7 +104,7 @@ class GoogleService {
       .withIssuer(clientEmail)
       .withSubject(clientEmail)
       .withAudience("https://oauth2.googleapis.com/token")
-      .withClaim("scope", "https://www.googleapis.com/auth/calendar.readonly")
+      .withClaim("scope", "https://www.googleapis.com/auth/calendar")
       .withIssuedAt(java.util.Date.from(Instant.ofEpochSecond(now)))
       .withExpiresAt(java.util.Date.from(Instant.ofEpochSecond(now + 3600)))
       .sign(Algorithm.RSA256(null, privateKey))
@@ -113,13 +122,21 @@ class GoogleService {
     val accessToken = ujson.read(tokenResp.body)("access_token").str
     accessToken
   }
-}
-object GoogleService {
-  case class Event(start: LocalTime, end: LocalTime)
+
+  case class Event(start: ZonedDateTime, end: ZonedDateTime, summary: String, description: String)
 
   case class EventRange(start: LocalTime, end: LocalTime) {
     def overlaps(range: EventRange): Boolean = {
       range.start.isBefore(end) && start.isBefore(range.end)
     }
   }
+
+  case class EventDateTime(dateTime: String) derives ReadWriter
+
+  case class EventSummary(
+                           summary: String,
+                           description: String,
+                           start: EventDateTime,
+                           end: EventDateTime
+                         ) derives ReadWriter
 }

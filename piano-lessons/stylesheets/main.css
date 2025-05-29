@@ -1,0 +1,512 @@
+h1, h2, h4, h5, h6 {
+    font-family: 'Baskervville', serif;
+}
+
+ul {
+    padding: 0;
+}
+
+.dark-heading {
+    color: black;
+}
+p, a, h3 {
+    font-family: 'Baskervville', serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: .6;
+}
+
+.nav-link:visited {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.body-link:visited {
+    color: #677036;
+}
+
+.body-link {
+    color: #677036;
+}
+
+.title {
+    grid-column: 1/4;
+    text-align: left;
+    align-self: end;
+    display: flex;
+}
+
+.title-text {
+    color: whitesmoke;
+    padding-left: 0.5em;
+    font-family: 'Satisfy', cursive;
+    margin-bottom: 0;
+    font-size: 3em;
+    margin-top: .5em;
+}
+
+.title-text-tagline {
+    font-size: .9em;
+    padding-left: 1em;
+    margin-top: 0;
+    font-style: italic;
+}
+
+.footer {
+    grid-row: 3;
+    background-image: linear-gradient(to top, #5c7944, #abcb42);
+}
+
+body {
+    background-color: #ffe8d6;
+}
+
+.logo-image {
+    width: 95px;
+    margin-left: 20px;
+    margin-top: 15px;
+    height: 100px;
+}
+
+.ism-logo {
+    width: 200px;
+    height: 200px;
+    float: right;
+    margin-right: 15px;
+}
+
+.row-nav {
+    font-size: large;
+    background-image: linear-gradient(to bottom, #f35001, #feaf17);
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 3fr;
+}
+
+.cards {
+    padding: 2rem;
+}
+
+.time {
+    justify-self: start;
+}
+
+.cards > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1rem;
+    list-style: none;
+}
+
+textarea.body {
+    width: 20rem;
+    height: 20rem;
+}
+
+.news-list {
+    grid-template-columns: none !important;
+}
+
+.cards > ul > li {
+    border: 1px solid #E2E2E2;
+    border-radius: .5rem;
+}
+
+.cards > ul > li > figure {
+    max-height: 200px;
+    overflow: hidden;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    position: relative;
+}
+
+.cards > ul > li > figure > img {
+    width: 100%;
+}
+
+.cards > ul > li > figure > figcaption {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+}
+
+.cards > ul > li > figure > figcaption > h3 {
+    color: white;
+    padding: .75rem;
+    font-size: 1.25rem;
+}
+
+.cards > ul > li > p {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 1rem .75rem;
+    color: #666666;
+}
+
+.cards > ul > li > a {
+    padding: .5rem 1rem;
+    margin: .5rem;
+}
+.card {
+    border: solid;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+
+.contact-card {
+    border: solid;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    justify-items: center;
+}
+
+.contact-text {
+    font-size: 20px;
+    margin: 8px;
+    padding: 8px;
+}
+
+.error-summary {
+    margin: 10px;
+}
+
+.payment-confirmation {
+    margin-left: 10px;
+}
+
+
+.time-card {
+    border: solid;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: grid;
+    grid-template-rows: 1fr;
+    font-family: Baskervville serif;
+}
+
+.time-link {
+    color: black;
+    font-size: 1.5em;
+}
+
+.time-link:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.page-template {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1rem;
+    list-style: none;
+    padding-left: 10px;
+}
+
+.left-arrow {
+    grid-column: 1;
+    justify-self: start;
+    align-self: center;
+}
+
+.right-arrow {
+    grid-column: 3;
+    justify-self: end;
+    align-self: center;
+}
+
+.lesson-times {
+    color: black;
+    border: grey 1px solid;
+    text-decoration: none;
+    font-family: Baskervville serif;
+    font-size: 1em;
+}
+
+.missing-day {
+    background-color: lightgrey;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 11%);
+    grid-template-rows: 30% 15% repeat(6, 30%);
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row: 1;
+    grid-column: 1 / 8;
+    background-color: #abcb42;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.calendar-month-label {
+    grid-column: 2;
+    align-self: center;
+}
+
+.btn {
+    font-family: Baskervville serif;
+    background-color: aliceblue;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: grey 1px solid;
+}
+
+.disabled-btn {
+    font-family: Baskervville serif;
+    background-color: lightgrey;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: grey 1px solid;
+}
+
+.pay-btn {
+    font-family: Baskervville serif;
+    background-color: #feaf17;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: grey 1px solid;
+    margin-top: 2em;
+}
+
+.booking-summary {
+    list-style: none;
+    font-family: Baskervville serif;
+    font-size: larger;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.btn:visited {
+    text-decoration: none;
+    color: black;
+    border: grey 1px solid;
+}
+
+.days-labels {
+    background-color: #565d64;
+    justify-items: start;
+    margin: unset;
+    border: grey 1px solid;
+    color: whitesmoke;
+}
+
+li.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.price-heading {
+    background-color: #feaf17 ;
+    grid-row: 1;
+}
+
+.price-amount {
+    background-color: #ffe8d6;
+    grid-row: 2;
+    font-family: Baskervville serif;
+    font-weight: bold;
+}
+
+.price-submit {
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #abcb42;
+}
+
+.price-submit-link  {
+    background-color: #ffe8d6;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.price-text {
+    text-align: center;
+    font-family: Baskervville serif;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.amount-text {
+    text-align: center;
+    font-family: Baskervville serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.amount-description {
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.container {
+    padding: 2px 16px;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.nav-list {
+    grid-column: 1 / 4;
+    justify-self: stretch;
+    object-fit: cover;
+    font-family: 'Satisfy', cursive;
+}
+
+.quote-text {
+    font-family: 'Satisfy', cursive;
+    padding-left: 1em;
+    font-size: x-large;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.sub-text {
+    font-size: medium;
+    font-family: Baskervville serif;
+}
+
+.why-page {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    margin-left: 10px;
+}
+.body-image {
+    grid-column: 2;
+    align-self: center;
+}
+
+.body-text {
+    grid-column: 3;
+    align-self: center;
+    justify-self: center;
+    padding-left: 1em;
+    font-size: larger;
+}
+
+.nav-list-item {
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul {
+    text-align: center;
+}
+
+nav ul a {
+    display: block;
+    width: 8em;
+}
+
+.main-body {
+    display: grid;
+    grid-template-rows: 0.5fr 4fr 1fr;
+    margin: 0;
+}
+
+.payment-form {
+    justify-self: start;
+}
+
+
+.contact-card > svg {
+    width: 20vw;
+    height: 20vh;
+}
+
+input {
+    padding: 10px;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    font-size: 14px;
+    width: 300px;
+    border-radius: 5px;
+    font-family: Baskervville serif;
+}
+
+.submit-button {
+    background-color: #f35001;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.err {
+    border-color: red;
+}
+
+.error-text {
+    color: red;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+}
+
+label {
+    color: black;
+    display: block;
+    font-family: Baskervville serif;
+    padding: 10px;
+}
+
+label:after { content: ": " }
+
+textarea {
+    padding: 10px;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.2);
+    font-size: 14px;
+    width: 300px;
+    border-radius: 5px;
+    font-family: Baskervville serif;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapped {
+    overflow-wrap: anywhere;
+}
+
+.policy-text {
+    margin-left: 1em;
+}

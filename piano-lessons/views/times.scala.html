@@ -1,4 +1,4 @@
-@(numberOfLessons: Int, lessonLength: Int, date: String, availableSlots: List[String])
+@(date: String, availableSlots: List[String])
 @main("Choose a time") {
   <ul class="page-template">
     <li>
@@ -10,7 +10,7 @@
         <section class="cards time">
           <ul class="time">
           @for(slot <- availableSlots) {
-            <li class="time-card"><a class="time-link" href="/booking-contact/@numberOfLessons/@lessonLength/@date/@slot">@slot</a></li>
+            <li class="time-card"><a class="time-link" href="/api/booking-contact/@date/@slot">@slot</a></li>
           }
           </ul>
         </section>
@@ -18,7 +18,7 @@
     } else {
       <li>
         <h1>There are no times available for this date.</h1>
-        <h2>Please choose <a href="/calendar/@numberOfLessons/@lessonLength?month=@(Option(date.split("-").head.toInt))&year=@(Option(date.split("-")(2).toInt))">another date</a></h2>
+        <h2>Please choose <a href="/api/calendar?month=@(Option(date.split("-").head.toInt))&year=@(Option(date.split("-")(2).toInt))">another date</a></h2>
       </li>
     }
   </ul>

@@ -1,0 +1,12 @@
+@(date: String, time: String)
+@main("Booking summary") {
+  <ul class="page-template">
+    <li>
+      <ul class="booking-summary">
+        <li><h2>Your booking summary</h2></li>
+        <li><h3 class="bold">Length of lesson:</h3> 30 minutes</li>
+        <li><h3 class="bold">Date and time of lesson:</h3> @date @time</li>
+      </ul>
+    </li>
+  </ul>
+}

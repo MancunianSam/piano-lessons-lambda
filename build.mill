@@ -12,6 +12,16 @@ object ZincWorkerGraalvm extends ZincWorkerModule {
 }
 
 object `piano-lessons` extends ScalaModule with TwirlModule with NativeImageModule {
+  def uploadTwirlToS3 = Task {
+    val twirlOut = compileTwirl().classes.path
+
+    val s3Bucket = "s3://piano-lessons-news-feed-images"
+    val result = os.proc("aws", "s3", "cp", twirlOut.toString, s3Bucket, "--recursive")
+      .call(stdout = os.Inherit, stderr = os.Inherit)
+
+    println(s"Uploaded Twirl files to $s3Bucket")
+  }
+
   def scalaVersion = "3.6.4"
 
   override def mainClass: Target[Some[String]] = Some("dev.sampalmer.calendar.Lambda")

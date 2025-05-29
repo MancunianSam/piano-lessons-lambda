@@ -11,23 +11,23 @@
   <head>
     <title>@title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" media="screen" href="https://webapp.clairepalmerpiano.co.uk/assets/stylesheets/3f2e0a448897aa0714919d6fe65f07b0-main.min.css">
-    <link rel="stylesheet" media="screen" href="https://webapp.clairepalmerpiano.co.uk/assets/stylesheets/7cdae00dae34fd8727372b6a59ab9e71-spinner.min.css">
-    <link rel="shortcut icon" type="image/png" href="https://webapp.clairepalmerpiano.co.uk/assets/images/8a79a1cce108954e1ba3157eed027589-favicon.ico">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="/stylesheets/main.css">
+    <link rel="stylesheet" media="screen" href="/stylesheets/spinner.css">
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baskervville&family=Satisfy&display=swap" rel="stylesheet">
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://webapp.clairepalmerpiano.co.uk/assets/javascripts/64bd16513ce7bfeeac84483b7639dbd9-payment.js")"></script>
+    <script src="https://webapp.clairepalmerpiano.co.uk/assets/javascripts/64bd16513ce7bfeeac84483b7639dbd9-payment.js"></script>
   </head>
   <body class="main-body">
     <nav class="row-nav">
       <ul class="nav-list">
-        <li class="nav-list-item"><a class="nav-link" href="">Home</a></li>
-        <li class="nav-list-item"><a class="nav-link" href="/">Book Lesson</a></li>
-        <li class="nav-list-item"><a class="nav-link" href="/choose-length">Why Piano?</a></li>
+        <li class="nav-list-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-list-item"><a class="nav-link" href="/api/calendar">Book Lesson</a></li>
+        <li class="nav-list-item"><a class="nav-link" href="/why-piano">Why Piano?</a></li>
         <li class="nav-list-item"><a class="nav-link" href="/contact">Contact</a></li>
-        <li class="nav-list-item"><a class="nav-link" href="/news">News</a></li>
         <li class="nav-list-item"><a class="nav-link" href="/policies">Business Policies</a></li>
       </ul>
 
@@ -36,14 +36,14 @@
           <h1 class="title-text">Claire Palmer Piano Lessons</h1>
           <h2 class="title-text title-text-tagline">Bespoke instrumental lessons for all</h2>
         </div>
-        <img class="logo-image" src="https://webapp.clairepalmerpiano.co.uk/assets/images/bbdd5ae8d47cbd3b57c7492f23fbbaae-logo.png">
+        <img class="logo-image" src="/images/logo.png">
       </div>
     </nav>
     <main>
     @content
     </main>
     <div class="footer">
-     <img class="ism-logo" src="https://webapp.clairepalmerpiano.co.uk/assets/images/e249ac88b3972890d7be238576215982-ism_logo.svg"  alt="ISM Logo"/>
+     <img class="ism-logo" src="/images/ism_logo.svg"  alt="ISM Logo"/>
     </div>
   </body>
 </html>
