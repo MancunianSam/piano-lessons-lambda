@@ -10,13 +10,12 @@ import java.nio.file.{Files, Path}
 val client = S3Client.builder().build()
 
 object Renderer extends App {
-  BookingService.createBooking("2025-05-29", "10:00", Map("email" -> "test@test.com", "name" -> "bob", "phone" -> "1234"))
-//  uploadHtml(html.index(), "index.html")
-//  uploadHtml(html.policies(), "policies")
-//  uploadHtml(html.whyPiano(), "why-piano")
-//  uploadHtml(html.contact(sys.env("CONTACT_NUMBER")), "contact")
-//  uploadAssets("images", "images/jpeg")
-//  uploadAssets("stylesheets", "text/css")
+  uploadHtml(html.index(), "index.html")
+  uploadHtml(html.policies(), "policies")
+  uploadHtml(html.whyPiano(), "why-piano")
+  uploadHtml(html.contact(sys.env("CONTACT_NUMBER")), "contact")
+  uploadAssets("images", "images/jpeg")
+  uploadAssets("stylesheets", "text/css")
 
 
   def uploadAssets(directory: String, contentType: String): Unit =
