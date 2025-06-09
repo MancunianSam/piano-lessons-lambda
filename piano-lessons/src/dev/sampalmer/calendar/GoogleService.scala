@@ -43,11 +43,14 @@ object GoogleService {
     val events = eventsJson("items").arr
 
     // Print event summaries and start times
-    events.map { event =>
+    events.flatMap { event =>
       val summary = event.obj.get("summary").map(_.str).getOrElse("(no title)")
-      val start = ZonedDateTime.parse(event("start")("dateTime").str).toLocalTime // or .obj.get("date").getOrElse(...)
-      val end = ZonedDateTime.parse(event("end")("dateTime").str).toLocalTime // or .obj.get("date").getOrElse(...)
-      EventRange(start, end)
+      if event("start").obj.contains("dateTime") && event("end").obj.contains("dateTime") then
+        val start = ZonedDateTime.parse(event("start")("dateTime").str).toLocalTime // or .obj.get("date").getOrElse(...)
+        val end = ZonedDateTime.parse(event("end")("dateTime").str).toLocalTime // or .obj.get("date").getOrElse(...)
+        Option(EventRange(start, end))
+      else
+        None
     }.toList
   }
 

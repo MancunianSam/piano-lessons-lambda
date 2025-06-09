@@ -5,17 +5,24 @@ import software.amazon.awssdk.core.sync.RequestBody
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
 
+import java.net.URLDecoder
 import java.nio.file.{Files, Path}
 
 val client = S3Client.builder().build()
 
 object Renderer extends App {
-  uploadHtml(html.index(), "index.html")
-  uploadHtml(html.policies(), "policies")
-  uploadHtml(html.whyPiano(), "why-piano")
-  uploadHtml(html.contact(sys.env("CONTACT_NUMBER")), "contact")
-  uploadAssets("images", "images/jpeg")
-  uploadAssets("stylesheets", "text/css")
+  val a = "sam.palmer2%40gmail.com"
+  val b = "this+dog+really+smells"
+  val c = URLDecoder.decode(a, "utf-8")
+  val d = URLDecoder.decode(b, "utf-8")
+  print(d)
+//  TimesService.getTimes("2025-06-18")
+//  uploadHtml(html.index(), "index.html")
+//  uploadHtml(html.policies(), "policies")
+//  uploadHtml(html.whyPiano(), "why-piano")
+//  uploadHtml(html.contact(sys.env("CONTACT_NUMBER")), "contact")
+//  uploadAssets("images", "images/jpeg")
+//  uploadAssets("stylesheets", "text/css")
 
 
   def uploadAssets(directory: String, contentType: String): Unit =

@@ -3,10 +3,10 @@ package dev.sampalmer.calendar
 import dev.sampalmer.calendar.EmailService.Order
 import dev.sampalmer.calendar.GoogleService.Event
 import dev.sampalmer.calendar.Lambda.{HtmlResponse, Request, contentTypeHeader}
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 
-import java.time.{LocalDate, LocalDateTime, LocalTime, ZoneId, ZoneOffset, ZonedDateTime}
+import java.net.URLDecoder
 import java.time.format.DateTimeFormatter
+import java.time.*
 import java.util.Base64
 import scala.jdk.CollectionConverters.*
 
@@ -38,13 +38,16 @@ object BookingService:
     html.bookingContactDetails(date, time, errors).body
   }
 
-  def createBooking(date: String, time: String, formData: Map[String, String]): Unit = {
-    val email = formData("email")
-    val name = formData("name")
-    val student = formData.get("student")
-    val phone = formData("phone")
-    val level = formData.get("phone")
-    val notes = formData.get("notes")
+  def decode(str: Option[String]): Option[String] = str.map(s => URLDecoder.decode(s, "utf-8"))
+  def decode(str: String): String = URLDecoder.decode(str, "utf-8")
+
+  private def createBooking(date: String, time: String, formData: Map[String, String]): Unit = {
+    val email = decode(formData("email"))
+    val name = decode(formData("name"))
+    val student = decode(formData.get("student"))
+    val phone = decode(formData("phone"))
+    val level = decode(formData.get("level"))
+    val notes = decode(formData.get("notes"))
     val calendarId = GoogleService.getCalendarId
     val localDate = LocalDate.parse(date)
     val localTime = LocalTime.parse(time)
@@ -62,9 +65,8 @@ object BookingService:
          |Notes: ${notes.getOrElse("")}
          |""".stripMargin
     GoogleService.addEvent(calendarId, Event(start, end, s"Trial lesson for $email", description))
-    EmailService.sendOrderEmail(formData("email"), order)
-    EmailService.sendOrderEmail("bookings@clairepalmerpiano.co.uk", order.copy(title = "You have a new booking"))
-
+    EmailService.sendOrderEmail(email, order)
+    EmailService.sendOrderEmail("clairelpalmer4@gmail.com", order.copy(title = "You have a new booking"))
   }
 
   private def getFormData(maybeBody: Option[String]): Map[String, String] = {

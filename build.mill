@@ -27,6 +27,7 @@ object `piano-lessons` extends ScalaModule with TwirlModule with NativeImageModu
   override def mainClass: Target[Some[String]] = Some("dev.sampalmer.calendar.Lambda")
   override def nativeImageOptions: T[Seq[String]] = Seq(
     "--verbose",
+    "-march=compatibility",
     "--no-fallback",
     "--enable-http",
     "--enable-https",
